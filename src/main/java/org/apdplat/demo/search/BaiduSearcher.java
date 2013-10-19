@@ -25,11 +25,10 @@ import javax.xml.transform.TransformerException;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
-public class BaiduSearcher {
-
+public class BaiduSearcher implements Searcher{
     private static final Logger LOG = LoggerFactory.getLogger(BaiduSearcher.class);
 
-    public static List<String> parse(String url, String xpathExpression) {
+    public List<String> parse(String url, String xpathExpression) {
         InputStream in = null;
         try {
             in = new URL(url).openStream();
@@ -48,15 +47,15 @@ public class BaiduSearcher {
         return null;
     }
 
-    public static List<String> parse(InputStream in, String xpathExpression) {
+    public List<String> parse(InputStream in, String xpathExpression) {
         return parse(in, xpathExpression, "UTF-8");
     }
 
-    public static List<Map<String, String>> parseMore(InputStream in, String xpathExpression) {
+    public List<Map<String, String>> parseMore(InputStream in, String xpathExpression) {
         return parseMore(in, xpathExpression, "UTF-8");
     }
 
-    public static List<Map<String, String>> parseMore(InputStream in, String xpathExpression, String encoding) {
+    public List<Map<String, String>> parseMore(InputStream in, String xpathExpression, String encoding) {
         DOMParser parser = new DOMParser();
         List<Map<String, String>> list = new ArrayList<>();
         try {
@@ -94,7 +93,7 @@ public class BaiduSearcher {
         return list;
     }
 
-    public static List<String> parse(InputStream in, String xpathExpression, String encoding) {
+    public List<String> parse(InputStream in, String xpathExpression, String encoding) {
         DOMParser parser = new DOMParser();
         List<String> list = new ArrayList<>();
         try {
@@ -123,7 +122,8 @@ public class BaiduSearcher {
         return list;
     }
 
-    public static List<Webpage> search(String url) {
+    @Override
+    public List<Webpage> search(String url) {
         InputStream in = null;
         try {
             in = new URL(url).openStream();
@@ -142,7 +142,7 @@ public class BaiduSearcher {
         return null;
     }
 
-    public static List<Webpage> search(InputStream in) {
+    public List<Webpage> search(InputStream in) {
         //保证只读一次
         byte[] datas = Tools.readAll(in);
         if (LOG.isDebugEnabled()) {
@@ -250,7 +250,9 @@ public class BaiduSearcher {
 
     public static void main(String[] args) {
         String url = "http://www.baidu.com/s?pn=0&wd=杨尚川";
-        List<Webpage> webpages = search(url);
+        
+        Searcher searcher = new BaiduSearcher();
+        List<Webpage> webpages = searcher.search(url);
         if (webpages != null) {
             int i = 1;
             for (Webpage webpage : webpages) {

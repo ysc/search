@@ -18,11 +18,11 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GoogleSearcher {
-
+public class GoogleSearcher implements Searcher{
     private static final Logger LOG = LoggerFactory.getLogger(GoogleSearcher.class);
 
-    public static List<Webpage> search(String url) {
+    @Override
+    public List<Webpage> search(String url) {
         List<Webpage> webpages = new ArrayList<>();
         try {
             HttpClient httpClient = new HttpClient();
@@ -86,7 +86,9 @@ public class GoogleSearcher {
             return;
         }
         String url = "http://ajax.googleapis.com/ajax/services/search/web?start=0&rsz=large&v=1.0&q=" + query;
-        List<Webpage> webpages = search(url);
+        
+        Searcher searcher = new GoogleSearcher();
+        List<Webpage> webpages = searcher.search(url);
         if (webpages != null) {
             int i = 1;
             for (Webpage webpage : webpages) {
