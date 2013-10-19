@@ -25,8 +25,8 @@ import javax.xml.transform.TransformerException;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
-public class BaiduSearcher implements Searcher{
-    private static final Logger LOG = LoggerFactory.getLogger(BaiduSearcher.class);
+public class NekoHTMLBaiduSearcher implements Searcher{
+    private static final Logger LOG = LoggerFactory.getLogger(NekoHTMLBaiduSearcher.class);
 
     public List<String> parse(String url, String xpathExpression) {
         InputStream in = null;
@@ -251,7 +251,7 @@ public class BaiduSearcher implements Searcher{
     public static void main(String[] args) {
         String url = "http://www.baidu.com/s?pn=0&wd=杨尚川";
         
-        Searcher searcher = new BaiduSearcher();
+        Searcher searcher = new NekoHTMLBaiduSearcher();
         List<Webpage> webpages = searcher.search(url);
         if (webpages != null) {
             int i = 1;
