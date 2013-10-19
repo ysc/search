@@ -123,7 +123,7 @@ public class BaiduSearcher {
         return list;
     }
 
-    public static List<Webpage> searchBaidu(String url) {
+    public static List<Webpage> search(String url) {
         InputStream in = null;
         try {
             in = new URL(url).openStream();
@@ -250,7 +250,7 @@ public class BaiduSearcher {
 
     public static void main(String[] args) {
         String url = "http://www.baidu.com/s?pn=0&wd=杨尚川";
-        List<Webpage> webpages = searchBaidu(url);
+        List<Webpage> webpages = search(url);
         if (webpages != null) {
             int i = 1;
             for (Webpage webpage : webpages) {
