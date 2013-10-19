@@ -127,7 +127,7 @@ public class BaiduSearcher {
         InputStream in = null;
         try {
             in = new URL(url).openStream();
-            return searchBaidu(in);
+            return search(in);
         } catch (Exception e) {
             LOG.error("错误", e);
         } finally {
@@ -142,7 +142,7 @@ public class BaiduSearcher {
         return null;
     }
 
-    public static List<Webpage> searchBaidu(InputStream in) {
+    public static List<Webpage> search(InputStream in) {
         //保证只读一次
         byte[] datas = Tools.readAll(in);
         if (LOG.isDebugEnabled()) {
