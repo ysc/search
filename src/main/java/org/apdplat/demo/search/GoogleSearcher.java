@@ -22,7 +22,7 @@ public class GoogleSearcher {
 
     private static final Logger LOG = LoggerFactory.getLogger(GoogleSearcher.class);
 
-    public static List<Webpage> searchGoogle(String url) {
+    public static List<Webpage> search(String url) {
         List<Webpage> webpages = new ArrayList<>();
         try {
             HttpClient httpClient = new HttpClient();
@@ -86,7 +86,7 @@ public class GoogleSearcher {
             return;
         }
         String url = "http://ajax.googleapis.com/ajax/services/search/web?start=0&rsz=large&v=1.0&q=" + query;
-        List<Webpage> webpages = searchGoogle(url);
+        List<Webpage> webpages = search(url);
         if (webpages != null) {
             int i = 1;
             for (Webpage webpage : webpages) {
