@@ -181,9 +181,9 @@ public class NekoHTMLBaiduSearcher implements Searcher{
             String content = "";
             String url = "";
             String titleXpathExpression = "//html/body/div/div/div/div[3]/div[2]/table[" + (i + 1) + "]/tbody/tr/td/h3/a";
-            String contentXpathExpression = "//html/body/div/div/div/div[3]/div[2]/table[" + (i + 1) + "]/tbody/tr/td/div[1]";
+            String summaryXpathExpression = "//html/body/div/div/div/div[3]/div[2]/table[" + (i + 1) + "]/tbody/tr/td/div[1]";
             LOG.debug("titleXpathExpression:" + titleXpathExpression);
-            LOG.debug("contentXpathExpression:" + contentXpathExpression);
+            LOG.debug("summaryXpathExpression:" + summaryXpathExpression);
             //重新构造输入流
             in = new ByteArrayInputStream(datas);
             List<String> titles = parse(in, titleXpathExpression);
@@ -205,7 +205,7 @@ public class NekoHTMLBaiduSearcher implements Searcher{
 
             //重新构造输入流
             in = new ByteArrayInputStream(datas);
-            List<String> summaries = parse(in, contentXpathExpression);
+            List<String> summaries = parse(in, summaryXpathExpression);
             //处理百度知道1
             if (titles != null && titles.size() == 1 && (summaries == null || summaries.isEmpty())) {
                 //重新构造输入流
@@ -245,9 +245,9 @@ public class NekoHTMLBaiduSearcher implements Searcher{
         if(webpages.size() < 10){            
             //处理百度百科
             String titleXpathExpression = "//html/body/div/div/div/div[3]/div[2]/div/h3/a";
-            String contentXpathExpression = "//html/body/div/div/div/div[3]/div[2]/div/div/p";
+            String summaryXpathExpression = "//html/body/div/div/div/div[3]/div[2]/div/div/p";
             LOG.debug("处理百度百科 titleXpathExpression:" + titleXpathExpression);
-            LOG.debug("处理百度百科 contentXpathExpression:" + contentXpathExpression);
+            LOG.debug("处理百度百科 summaryXpathExpression:" + summaryXpathExpression);
             //重新构造输入流
             in = new ByteArrayInputStream(datas);
             List<String> titles = parse(in, titleXpathExpression);
@@ -269,7 +269,7 @@ public class NekoHTMLBaiduSearcher implements Searcher{
             }
             //重新构造输入流
             in = new ByteArrayInputStream(datas);
-            List<String> summaries = parse(in, contentXpathExpression);
+            List<String> summaries = parse(in, summaryXpathExpression);
             if (titles != null && titles.size() == 1 && summaries != null && summaries.size() == 1) {
                 Webpage webpage = new Webpage();
                 webpage.setTitle(titles.get(0));
