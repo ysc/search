@@ -242,6 +242,45 @@ public class NekoHTMLBaiduSearcher implements Searcher{
                 LOG.error("获取搜索结果列表项出错:" + titles + " - " + summaries);
             }
         }
+        if(webpages.size() < 10){            
+            //处理百度百科
+            String titleXpathExpression = "//html/body/div/div/div/div[3]/div[2]/div/h3/a";
+            String contentXpathExpression = "//html/body/div/div/div/div[3]/div[2]/div/div/p";
+            LOG.debug("处理百度百科 titleXpathExpression:" + titleXpathExpression);
+            LOG.debug("处理百度百科 contentXpathExpression:" + contentXpathExpression);
+            //重新构造输入流
+            in = new ByteArrayInputStream(datas);
+            List<String> titles = parse(in, titleXpathExpression);
+            //重新构造输入流
+            in = new ByteArrayInputStream(datas);
+            List<Map<String, String>> titleWithHrefs = parseMore(in, titleXpathExpression);
+            String content = "";
+            String url = "";
+            for (Map<String, String> titleWithHref : titleWithHrefs) {
+                String title = titleWithHref.get("title");
+                String href = titleWithHref.get("href");
+                LOG.debug(title + " " + titleWithHref.get("href"));
+                if (href != null) {
+                    content = Tools.getHTMLContent(href);
+                    url = href;
+                } else {
+                    LOG.info("页面正确提取失败");
+                }
+            }
+            //重新构造输入流
+            in = new ByteArrayInputStream(datas);
+            List<String> summaries = parse(in, contentXpathExpression);
+            if (titles != null && titles.size() == 1 && summaries != null && summaries.size() == 1) {
+                Webpage webpage = new Webpage();
+                webpage.setTitle(titles.get(0));
+                webpage.setUrl(url);
+                webpage.setSummary(summaries.get(0));
+                webpage.setContent(content);
+                webpages.add(webpage);
+            } else {
+                LOG.error("获取搜索结果列表项出错:" + titles + " - " + summaries);
+            }
+        }
         if (webpages.isEmpty()) {
             return null;
         }
