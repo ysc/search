@@ -75,7 +75,7 @@
             <artifactId>org.json</artifactId>
             <version>${json.version}</version>
         </dependency> 
-        
+        <!-- 使用JSoup和CSSPath来解析百度搜索页面 -->
         <dependency>
             <groupId>org.jsoup</groupId>
             <artifactId>jsoup</artifactId>
