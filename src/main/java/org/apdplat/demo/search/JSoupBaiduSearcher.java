@@ -18,7 +18,7 @@ public class JSoupBaiduSearcher implements Searcher{
         List<Webpage> webpages = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url).get();
-            String cssQuery = "html body div#out div#in div#wrapper div#container.container_s p#page span.nums";
+            String cssQuery = "html body div#out div#in div#wrapper div#container p#page span.nums";
             LOG.debug("total cssQuery: " + cssQuery);
             Element totalElement = document.select(cssQuery).first();
             String totalText = totalElement.text(); 
@@ -37,8 +37,8 @@ public class JSoupBaiduSearcher implements Searcher{
                 len = total;
             }
             for (int i = 0; i < len; i++) {
-                String titleCssQuery = "html body div#out div#in div#wrapper div#container.container_s div#content_left table#" + (i + 1) + ".result tbody tr td.c-default h3.t a";
-                String summaryCssQuery = "html body div#out div#in div#wrapper div#container.container_s div#content_left table#" + (i + 1) + ".result tbody tr td.c-default div.c-abstract";
+                String titleCssQuery = "html body div#out div#in div#wrapper div#container div#content_left table#" + (i + 1) + ".result tbody tr td.c-default h3.t a";
+                String summaryCssQuery = "html body div#out div#in div#wrapper div#container div#content_left table#" + (i + 1) + ".result tbody tr td.c-default div.c-abstract";
                 LOG.debug("titleCssQuery:" + titleCssQuery);
                 LOG.debug("summaryCssQuery:" + summaryCssQuery);
                 Element titleElement = document.select(titleCssQuery).first();
@@ -49,8 +49,8 @@ public class JSoupBaiduSearcher implements Searcher{
                     href = titleElement.attr("href");
                 }else{
                     //处理百度百科
-                    titleCssQuery = "html body div#out div#in div#wrapper div#container.container_s div#content_left div#1.result-op h3.t a";
-                    summaryCssQuery = "html body div#out div#in div#wrapper div#container.container_s div#content_left div#1.result-op div p";
+                    titleCssQuery = "html body div#out div#in div#wrapper div#container div#content_left div#1.result-op h3.t a";
+                    summaryCssQuery = "html body div#out div#in div#wrapper div#container div#content_left div#1.result-op div p";
                     LOG.debug("处理百度百科 titleCssQuery:" + titleCssQuery);
                     LOG.debug("处理百度百科 summaryCssQuery:" + summaryCssQuery);
                     titleElement = document.select(titleCssQuery).first();
