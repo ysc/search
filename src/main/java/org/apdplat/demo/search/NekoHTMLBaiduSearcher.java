@@ -123,7 +123,7 @@ public class NekoHTMLBaiduSearcher implements Searcher{
     }
 
     @Override
-    public List<Webpage> search(String url) {
+    public SearchResult search(String url) {
         InputStream in = null;
         try {
             in = new URL(url).openStream();
@@ -142,7 +142,8 @@ public class NekoHTMLBaiduSearcher implements Searcher{
         return null;
     }
 
-    public List<Webpage> search(InputStream in) {
+    public SearchResult search(InputStream in) {
+        SearchResult searchResult = new SearchResult();
         //保证只读一次
         byte[] datas = Tools.readAll(in);
         if (LOG.isDebugEnabled()) {
@@ -176,6 +177,7 @@ public class NekoHTMLBaiduSearcher implements Searcher{
         if (total < 10) {
             len = total;
         }
+        searchResult.setTotal(total);
         List<Webpage> webpages = new ArrayList<>();
         for (int i = 0; i < len; i++) {
             String content = "";
@@ -284,14 +286,16 @@ public class NekoHTMLBaiduSearcher implements Searcher{
         if (webpages.isEmpty()) {
             return null;
         }
-        return webpages;
+        searchResult.setWebpages(webpages);
+        return searchResult;
     }
 
     public static void main(String[] args) {
         String url = "http://www.baidu.com/s?pn=0&wd=杨尚川";
         
         Searcher searcher = new NekoHTMLBaiduSearcher();
-        List<Webpage> webpages = searcher.search(url);
+        SearchResult searchResult = searcher.search(url);
+        List<Webpage> webpages = searchResult.getWebpages();
         if (webpages != null) {
             int i = 1;
             for (Webpage webpage : webpages) {

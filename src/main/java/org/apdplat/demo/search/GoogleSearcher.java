@@ -22,7 +22,8 @@ public class GoogleSearcher implements Searcher{
     private static final Logger LOG = LoggerFactory.getLogger(GoogleSearcher.class);
 
     @Override
-    public List<Webpage> search(String url) {
+    public SearchResult search(String url) {
+        SearchResult searchResult = new SearchResult();
         List<Webpage> webpages = new ArrayList<>();
         try {
             HttpClient httpClient = new HttpClient();
@@ -45,6 +46,7 @@ public class GoogleSearcher implements Searcher{
             String totalResult = json.getJSONObject("responseData").getJSONObject("cursor").getString("estimatedResultCount");
             int totalResultCount = Integer.parseInt(totalResult);
             LOG.info("搜索返回记录数： " + totalResultCount);
+            searchResult.setTotal(totalResultCount);
 
             JSONArray results = json.getJSONObject("responseData").getJSONArray("results");
 
@@ -74,7 +76,8 @@ public class GoogleSearcher implements Searcher{
         } catch (IOException | JSONException | NumberFormatException e) {
             LOG.error("执行搜索失败：", e);
         }
-        return webpages;
+        searchResult.setWebpages(webpages);
+        return searchResult;
     }
 
     public static void main(String args[]) {
@@ -88,7 +91,8 @@ public class GoogleSearcher implements Searcher{
         String url = "http://ajax.googleapis.com/ajax/services/search/web?start=0&rsz=large&v=1.0&q=" + query;
         
         Searcher searcher = new GoogleSearcher();
-        List<Webpage> webpages = searcher.search(url);
+        SearchResult searchResult = searcher.search(url);
+        List<Webpage> webpages = searchResult.getWebpages();
         if (webpages != null) {
             int i = 1;
             for (Webpage webpage : webpages) {

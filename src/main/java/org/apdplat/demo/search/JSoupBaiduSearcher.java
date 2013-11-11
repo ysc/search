@@ -16,13 +16,15 @@ public class JSoupBaiduSearcher implements Searcher{
     private static final Logger LOG = LoggerFactory.getLogger(JSoupBaiduSearcher.class);
 
     @Override
-    public List<Webpage> search(String url) {
+    public SearchResult search(String url) {
+        SearchResult searchResult = new SearchResult();
         List<Webpage> webpages = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url).get();
             
             //获取搜索结果数目
             int total = getBaiduSearchResultCount(document);
+            searchResult.setTotal(total);
             int len = 10;
             if (total < 1) {
                 return null;
@@ -89,7 +91,8 @@ public class JSoupBaiduSearcher implements Searcher{
         } catch (IOException ex) {
             LOG.error("搜索出错",ex);
         }
-        return webpages;
+        searchResult.setWebpages(webpages);;
+        return searchResult;
     }
     /**
      * 获取百度搜索结果数
@@ -118,7 +121,8 @@ public class JSoupBaiduSearcher implements Searcher{
         String url = "http://www.baidu.com/s?pn=0&wd=杨尚川";
         
         Searcher searcher = new JSoupBaiduSearcher();
-        List<Webpage> webpages = searcher.search(url);
+        SearchResult searchResult = searcher.search(url);
+        List<Webpage> webpages = searchResult.getWebpages();
         if (webpages != null) {
             int i = 1;
             for (Webpage webpage : webpages) {
