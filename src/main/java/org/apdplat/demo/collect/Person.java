@@ -28,6 +28,7 @@ import java.util.Map;
  * @author 杨尚川
  */
 public class Person {
+    // 姓名
     private String name;
     //基本信息
     private Map<String, String> basicInfos;
