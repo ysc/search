@@ -25,5 +25,12 @@ package org.apdplat.demo.search;
  * @author 杨尚川
  */
 public interface BaiduSearcher extends Searcher{
-
+    public SearchResult searchNews(String keyword);
+    public SearchResult searchNews(String keyword, int page);
+    public SearchResult searchTieba(String keyword);
+    public SearchResult searchTieba(String keyword, int page);
+    public SearchResult searchZhidao(String keyword);
+    public SearchResult searchZhidao(String keyword, int page);
+    public SearchResult searchWenku(String keyword);
+    public SearchResult searchWenku(String keyword, int page);
 }

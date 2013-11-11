@@ -25,7 +25,7 @@ import javax.xml.transform.TransformerException;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
-public class NekoHTMLBaiduSearcher implements BaiduSearcher{
+public class NekoHTMLBaiduSearcher extends AbstractBaiduSearcher{
     private static final Logger LOG = LoggerFactory.getLogger(NekoHTMLBaiduSearcher.class);
 
     public List<String> parse(String url, String xpathExpression) {
