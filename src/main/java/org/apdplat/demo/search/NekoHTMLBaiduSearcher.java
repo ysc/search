@@ -128,7 +128,10 @@ public class NekoHTMLBaiduSearcher implements Searcher{
     }
     @Override
     public SearchResult search(String keyword, int page) {
-        String url = "http://www.baidu.com/s?pn="+(page-1)+"&wd="+keyword;
+        int pageSize = 10;
+        //百度搜索结果每页大小为10，pn参数代表的不是页数，而是返回结果的开始数
+        //如获取第一页则pn=0，第二页则pn=10，第三页则pn=20，以此类推，抽象出模式：(page-1)*pageSize
+        String url = "http://www.baidu.com/s?pn="+(page-1)*pageSize+"&wd="+keyword;
         InputStream in = null;
         try {
             in = new URL(url).openStream();
