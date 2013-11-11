@@ -3,6 +3,8 @@ package org.apdplat.demo.search;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,21 +20,14 @@ public class JSoupBaiduSearcher implements Searcher{
         List<Webpage> webpages = new ArrayList<>();
         try {
             Document document = Jsoup.connect(url).get();
-            String cssQuery = "html body div#out div#in div#wrapper div#container p#page span.nums";
-            LOG.debug("total cssQuery: " + cssQuery);
-            Element totalElement = document.select(cssQuery).first();
-            String totalText = totalElement.text(); 
-            LOG.info("搜索结果：" + totalText);
-            int start = 10;
-            if (totalText.indexOf("约") != -1) {
-                start = 11;
-            }
-            int total = Integer.parseInt(totalText.substring(start).replace(",", "").replace("个", ""));
-            LOG.info("搜索结果数：" + total);
+            
+            //获取搜索结果数目
+            int total = getBaiduSearchResultCount(document);
             int len = 10;
             if (total < 1) {
                 return null;
             }
+            //如果搜索到的结果不足一页
             if (total < 10) {
                 len = total;
             }
@@ -95,6 +90,28 @@ public class JSoupBaiduSearcher implements Searcher{
             LOG.error("搜索出错",ex);
         }
         return webpages;
+    }
+    /**
+     * 获取百度搜索结果数
+     * 获取如下文本并解析数字：
+     * 百度为您找到相关结果约13,200个
+     * @param document 文档
+     * @return 结果数
+     */
+    private int getBaiduSearchResultCount(Document document){
+        String cssQuery = "html body div#out div#in div#wrapper div#container p#page span.nums";
+        LOG.debug("total cssQuery: " + cssQuery);
+        Element totalElement = document.select(cssQuery).first();
+        String totalText = totalElement.text(); 
+        LOG.info("搜索结果文本：" + totalText);
+        
+        String regEx="[^0-9]";   
+        Pattern pattern = Pattern.compile(regEx);      
+        Matcher matcher = pattern.matcher(totalText);
+        totalText = matcher.replaceAll("");
+        int total = Integer.parseInt(totalText);
+        LOG.info("搜索结果数：" + total);
+        return total;
     }
 
     public static void main(String[] args) {
