@@ -12,7 +12,7 @@ import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JSoupBaiduSearcher implements Searcher{
+public class JSoupBaiduSearcher implements BaiduSearcher{
     private static final Logger LOG = LoggerFactory.getLogger(JSoupBaiduSearcher.class);
 
     @Override
