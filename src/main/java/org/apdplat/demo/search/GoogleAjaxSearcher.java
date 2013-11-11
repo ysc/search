@@ -18,8 +18,8 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class GoogleSearcher implements Searcher{
-    private static final Logger LOG = LoggerFactory.getLogger(GoogleSearcher.class);
+public class GoogleAjaxSearcher implements Searcher{
+    private static final Logger LOG = LoggerFactory.getLogger(GoogleAjaxSearcher.class);
 
     @Override
     public SearchResult search(String keyword) {
@@ -99,7 +99,7 @@ public class GoogleSearcher implements Searcher{
             return;
         }
         
-        Searcher searcher = new GoogleSearcher();
+        Searcher searcher = new GoogleAjaxSearcher();
         SearchResult searchResult = searcher.search(keyword, 2);
         List<Webpage> webpages = searchResult.getWebpages();
         if (webpages != null) {
