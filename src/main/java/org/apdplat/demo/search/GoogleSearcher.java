@@ -22,8 +22,15 @@ public class GoogleSearcher implements Searcher{
     private static final Logger LOG = LoggerFactory.getLogger(GoogleSearcher.class);
 
     @Override
-    public SearchResult search(String url) {
+    public SearchResult search(String keyword) {
+        return search(keyword, 1);
+    }
+    @Override
+    public SearchResult search(String keyword, int page) {
+        String url = "http://ajax.googleapis.com/ajax/services/search/web?start="+(page-1)+"&rsz=large&v=1.0&q=" + keyword;
+        
         SearchResult searchResult = new SearchResult();
+        searchResult.setPage(page);
         List<Webpage> webpages = new ArrayList<>();
         try {
             HttpClient httpClient = new HttpClient();
@@ -81,20 +88,20 @@ public class GoogleSearcher implements Searcher{
     }
 
     public static void main(String args[]) {
-        String query = "杨尚川";
+        String keyword = "杨尚川";
         try {
-            query = URLEncoder.encode(query, "UTF-8");
+            keyword = URLEncoder.encode(keyword, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             LOG.error("url构造失败", e);
             return;
         }
-        String url = "http://ajax.googleapis.com/ajax/services/search/web?start=0&rsz=large&v=1.0&q=" + query;
         
         Searcher searcher = new GoogleSearcher();
-        SearchResult searchResult = searcher.search(url);
+        SearchResult searchResult = searcher.search(keyword, 2);
         List<Webpage> webpages = searchResult.getWebpages();
         if (webpages != null) {
             int i = 1;
+            LOG.info("搜索结果 当前第 " + searchResult.getPage() + " 页，页面大小为：" + searchResult.getPageSize() + " 共有结果数：" + searchResult.getTotal());
             for (Webpage webpage : webpages) {
                 LOG.info("搜索结果 " + (i++) + " ：");
                 LOG.info("标题：" + webpage.getTitle());

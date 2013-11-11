@@ -123,11 +123,18 @@ public class NekoHTMLBaiduSearcher implements Searcher{
     }
 
     @Override
-    public SearchResult search(String url) {
+    public SearchResult search(String keyword) {
+        return search(keyword, 1);
+    }
+    @Override
+    public SearchResult search(String keyword, int page) {
+        String url = "http://www.baidu.com/s?pn="+(page-1)+"&wd="+keyword;
         InputStream in = null;
         try {
             in = new URL(url).openStream();
-            return search(in);
+            SearchResult searchResult = search(in);
+            searchResult.setPage(page);
+            return searchResult;
         } catch (Exception e) {
             LOG.error("错误", e);
         } finally {
@@ -290,14 +297,13 @@ public class NekoHTMLBaiduSearcher implements Searcher{
         return searchResult;
     }
 
-    public static void main(String[] args) {
-        String url = "http://www.baidu.com/s?pn=0&wd=杨尚川";
-        
+    public static void main(String[] args) {        
         Searcher searcher = new NekoHTMLBaiduSearcher();
-        SearchResult searchResult = searcher.search(url);
+        SearchResult searchResult = searcher.search("杨尚川", 2);
         List<Webpage> webpages = searchResult.getWebpages();
         if (webpages != null) {
             int i = 1;
+            LOG.info("搜索结果 当前第 " + searchResult.getPage() + " 页，页面大小为：" + searchResult.getPageSize() + " 共有结果数：" + searchResult.getTotal());
             for (Webpage webpage : webpages) {
                 LOG.info("搜索结果 " + (i++) + " ：");
                 LOG.info("标题：" + webpage.getTitle());

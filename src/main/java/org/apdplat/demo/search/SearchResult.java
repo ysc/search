@@ -33,6 +33,10 @@ public class SearchResult {
     private int page;
     //页面数据
     private List<Webpage> webpages;
+    
+    public int getPageSize(){
+        return webpages.size();
+    }
 
     public int getTotal() {
         return total;
