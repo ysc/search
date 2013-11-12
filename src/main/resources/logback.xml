@@ -3,7 +3,7 @@
 <configuration>
   <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
-      <Pattern>%d [%t] %-5p [%c] - %m%n</Pattern>
+      <Pattern>%m%n</Pattern>
     </layout>
   </appender>
   <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -17,7 +17,7 @@
       <MaxFileSize>5MB</MaxFileSize> 
     </triggeringPolicy> 
     <layout class="ch.qos.logback.classic.PatternLayout">
-      <Pattern>%d [%t] %-5p [%c] - %m%n</Pattern>j
+      <Pattern>%m%n</Pattern>j
     </layout>
   </appender>
   
