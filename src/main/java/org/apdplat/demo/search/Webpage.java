@@ -1,9 +1,15 @@
 package org.apdplat.demo.search; 
-
+/**
+ * 网页解析实体
+ */
 public class Webpage {
+        // 标题
 	private String title;
+        // 链接
 	private String url;
+        // 简介
 	private String summary;
+        // 正文内容
 	private String content;
 	
 	public String getTitle() {
