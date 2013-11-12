@@ -7,12 +7,10 @@
 package org.apdplat.search.util.baidu;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
-import org.apdplat.demo.search.Webpage;
+import org.apdplat.demo.search.SearchResult;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -28,8 +26,8 @@ import org.slf4j.LoggerFactory;
 public class JsoupBaiduInfoUtil {
     private static final Logger LOG = LoggerFactory.getLogger(JsoupBaiduInfoUtil.class);
     private Document document = null;
-    private BaiduModel baiduModels = new BaiduModel();
-    private String url = "http://www.baidu.com/s?pn=page&wd=";
+    private SearchResult baiduModels = new SearchResult();
+    private String url = "http://www.baidu.com/s";
     /**
      * 百度搜索结果：百度为您找到相关结果约13,100个
      */
@@ -45,18 +43,16 @@ public class JsoupBaiduInfoUtil {
     /**
      * @author JONE
      * @param name 需要查询的字段
+     * @param page
      * @throws java.io.IOException 
      * @time 2013-11-11
      * @description 构造器
      */
     public JsoupBaiduInfoUtil( String name,int page) throws IOException{
-        if(StringUtils.isEmpty(StringUtils.trim(name)) || 0 < page){
+        if(StringUtils.isEmpty(StringUtils.trim(name)) || 0 >= page){
             throw new NullPointerException();
-        } 
-        url += name;
-        baiduModels.setPage(page);
-        url = url.replace("page", String.valueOf((page-1)*10));
-        this.document = Jsoup.connect(url).get();
+         }
+        this.document = Jsoup.connect(url).data("wd", name).data("pn", String.valueOf((page-1)*10)).get();
     }
      /**
      * @author JONE
@@ -71,8 +67,10 @@ public class JsoupBaiduInfoUtil {
        }
        String regEx="[^0-9]";   
        Pattern p = Pattern.compile(regEx);      
-       Matcher m = p.matcher(resultsCountText);      
-       return m.replaceAll("").trim();
+       Matcher m = p.matcher(resultsCountText); 
+       String totalCount = m.replaceAll("").trim();
+       baiduModels.setTotal(Integer.parseInt(totalCount));
+       return totalCount;
     }
     
     /**
@@ -91,7 +89,5 @@ public class JsoupBaiduInfoUtil {
          LOG.info("搜索结果：" + totalText);
          return totalText;
     }
-    
-    
 }
 
