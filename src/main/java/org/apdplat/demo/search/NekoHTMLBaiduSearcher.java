@@ -302,7 +302,7 @@ public class NekoHTMLBaiduSearcher extends AbstractBaiduSearcher{
 
     public static void main(String[] args) {        
         Searcher searcher = new NekoHTMLBaiduSearcher();
-        SearchResult searchResult = searcher.search("杨尚川", 2);
+        SearchResult searchResult = searcher.search("杨尚川", 1);
         List<Webpage> webpages = searchResult.getWebpages();
         if (webpages != null) {
             int i = 1;

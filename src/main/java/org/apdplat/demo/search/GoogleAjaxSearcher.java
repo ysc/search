@@ -100,7 +100,7 @@ public class GoogleAjaxSearcher implements GoogleSearcher{
         }
         
         Searcher searcher = new GoogleAjaxSearcher();
-        SearchResult searchResult = searcher.search(keyword, 2);
+        SearchResult searchResult = searcher.search(keyword, 1);
         List<Webpage> webpages = searchResult.getWebpages();
         if (webpages != null) {
             int i = 1;
