@@ -23,8 +23,8 @@ import org.slf4j.LoggerFactory;
 public class XHRBPaperCollector implements PaperCollector{
     private static final Logger LOG = LoggerFactory.getLogger(XHRBPaperCollector.class);
     private static final String paperName = "新华日报";
-    private static String url = "http://xh.xhby.net/newxh/html/";
     private static final String paperPath = "http://xh.xhby.net/newxh/";
+    private static String url = paperPath+"html/";
     private static final String hrefPrefix = paperPath+"page/1/";
     private static final String start = "node_2.htm";
     private static final String pdfCssQuery = "html body table tbody tr td table tbody tr td table tbody tr td table tbody tr td div table tbody tr td a";

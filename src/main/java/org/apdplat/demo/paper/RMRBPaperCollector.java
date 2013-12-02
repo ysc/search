@@ -23,8 +23,8 @@ import org.slf4j.LoggerFactory;
 public class RMRBPaperCollector implements PaperCollector{
     private static final Logger LOG = LoggerFactory.getLogger(RMRBPaperCollector.class);
     private static final String paperName = "人民日报";
-    private static String url = "http://paper.people.com.cn/rmrb/html/";
     private static final String paperPath = "http://paper.people.com.cn/rmrb/";
+    private static String url = paperPath+"html/";
     private static final String hrefPrefix = paperPath+"page/";
     private static final String start = "nbs.D110000renmrb_01.htm";
     private static final String pdfCssQuery = "html body div.div_bg div.div_center div.right_c div#ozoom div.list_t div.list_r div.l_c div#pageList ul div div.right_title-pdf a";
