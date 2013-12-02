@@ -147,5 +147,21 @@ public class YZWBPaperCollector implements PaperCollector{
         for(File file : files){
             LOG.info((i++)+" : " + file.getAbsolutePath());
         }
+        //昨天
+        Date date = new Date();
+        date.setTime(System.currentTimeMillis()-24*3600*1000);
+        files = paperCollector.collect(date);
+        i = 1;
+        for(File file : files){
+            LOG.info((i++)+" : " + file.getAbsolutePath());
+        }
+        //前天
+        date = new Date();
+        date.setTime(System.currentTimeMillis()-2*24*3600*1000);
+        files = paperCollector.collect(date);
+        i = 1;
+        for(File file : files){
+            LOG.info((i++)+" : " + file.getAbsolutePath());
+        }
     }
 }
