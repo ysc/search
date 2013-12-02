@@ -51,7 +51,7 @@ public class YZWBPaperCollector implements PaperCollector{
                     String type = element.text();
                     LOG.debug("type："+type);
                     href = href.replace("./", "");
-                    href = url+href;
+                    href = url + sf.format(date) + href;
                     LOG.debug("type href："+href);
                     //不同的子报的pdfCssQuery都一样
                     List<String> hrefs = collect(href, pdfCssQuery);
