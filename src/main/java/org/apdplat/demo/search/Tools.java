@@ -2,9 +2,12 @@ package org.apdplat.demo.search;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.URL;
 
 import org.slf4j.Logger;
@@ -33,6 +36,32 @@ public class Tools {
             LOG.debug("解析URL失败：" + url, e);
         }
         return null;
+    }
+    public static void copyFile(InputStream in, File outFile){
+        OutputStream out = null;
+        try {
+            byte[] data=readAll(in);
+            out = new FileOutputStream(outFile);
+            out.write(data, 0, data.length);
+            out.close();
+        } catch (IOException ex) {
+            LOG.error("文件操作失败",ex);
+        } finally {
+            try {
+                if(in!=null){
+                    in.close();
+                }
+            } catch (IOException ex) {
+             LOG.error("文件操作失败",ex);
+            }
+            try {
+                if(out!=null){
+                    out.close();
+                }
+            } catch (IOException ex) {
+             LOG.error("文件操作失败",ex);
+            }
+        }
     }
 
     public static byte[] readAll(InputStream in) {
