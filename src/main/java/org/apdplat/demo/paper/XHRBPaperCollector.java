@@ -25,7 +25,7 @@ public class XHRBPaperCollector implements PaperCollector{
     private static final String paperName = "新华日报";
     private static String url = "http://xh.xhby.net/newxh/html/";
     private static final String paperPath = "http://xh.xhby.net/newxh/";
-    private static final String hrefPrefix = "http://xh.xhby.net/newxh/page/1/";
+    private static final String hrefPrefix = paperPath+"page/1/";
     private static final String start = "node_2.htm";
     private static final String pdfCssQuery = "html body table tbody tr td table tbody tr td table tbody tr td table tbody tr td div table tbody tr td a";
     private static final SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM/dd/"); 

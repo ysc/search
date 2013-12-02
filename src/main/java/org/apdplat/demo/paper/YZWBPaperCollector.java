@@ -25,7 +25,7 @@ public class YZWBPaperCollector implements PaperCollector{
     private static final String paperName = "扬子晚报";
     private static String url = "http://epaper.yzwb.net/html_t/";
     private static final String paperPath = "http://epaper.yzwb.net/";
-    private static final String hrefPrefix = "http://epaper.yzwb.net/images/";
+    private static final String hrefPrefix = paperPath+"images/";
     private static final String start = "node_1.htm";
     private static final String typeCssQuery = "html body div.middiv1 div#layer2 div.layer div#layer4 div#layer43 div#wrap div#navigation.smartmenu ul li ul li a";
     private static final String pdfCssQuery = "html body div#bmdh table tbody tr td a";
