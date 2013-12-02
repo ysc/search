@@ -24,7 +24,7 @@ public class YCWBPaperCollector implements PaperCollector{
     private static final Logger LOG = LoggerFactory.getLogger(YCWBPaperCollector.class);
     private static final String paperName = "羊城晚报";
     private static final String paperPath = "http://www.ycwb.com/ePaper/ycwb/";
-    private static String url = paperPath+"html/";
+    private static final String url = paperPath+"html/";
     private static final String hrefPrefix = paperPath+"images/";
     private static final String start = "node_2081.htm";
     private static final String pdfCssQuery = "html body div.cbody div.areaL div.box div.conBox2 div div.xx h2 em a.px12";

@@ -24,7 +24,7 @@ public class YZWBPaperCollector implements PaperCollector{
     private static final Logger LOG = LoggerFactory.getLogger(YZWBPaperCollector.class);
     private static final String paperName = "扬子晚报";
     private static final String paperPath = "http://epaper.yzwb.net/";
-    private static String url = paperPath+"html_t/";
+    private static final String url = paperPath+"html_t/";
     private static final String hrefPrefix = paperPath+"images/";
     private static final String start = "node_1.htm";
     private static final String typeCssQuery = "html body div.middiv1 div#layer2 div.layer div#layer4 div#layer43 div#wrap div#navigation.smartmenu ul li ul li a";
