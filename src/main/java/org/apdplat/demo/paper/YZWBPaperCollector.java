@@ -35,9 +35,8 @@ public class YZWBPaperCollector implements PaperCollector{
     public List<File> collect(Date date) {
         List<File> files = new ArrayList<>();
         try {
-            url += sf.format(date);
             LOG.debug("url: "+url);
-            String paper = url + start;
+            String paper = url + sf.format(date) + start;
             LOG.debug("paper: "+paper);
             Document document = Jsoup.connect(paper).get();
             
