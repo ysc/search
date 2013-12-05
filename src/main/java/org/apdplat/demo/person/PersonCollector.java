@@ -1,4 +1,4 @@
-package org.apdplat.demo.collect;
+package org.apdplat.demo.person;
 
 import java.io.IOException;
 import java.util.ArrayList;
