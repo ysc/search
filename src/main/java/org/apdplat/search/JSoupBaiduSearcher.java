@@ -44,8 +44,8 @@ public class JSoupBaiduSearcher extends AbstractBaiduSearcher{
                 len = total;
             }
             for (int i = 0; i < len; i++) {
-                String titleCssQuery = "html body div#out div#in div#wrapper div#container div#content_left table#" + (i + 1 + (page-1)*pageSize) + ".result tbody tr td.c-default h3.t a";
-                String summaryCssQuery = "html body div#out div#in div#wrapper div#container div#content_left table#" + (i + 1 + (page-1)*pageSize) + ".result tbody tr td.c-default div.c-abstract";
+                String titleCssQuery = "html body div div div div#content_left div#" + (i + 1 + (page-1)*pageSize) + ".result.c-container h3.t a";
+                String summaryCssQuery = "html body div div div div#content_left div#" + (i + 1 + (page-1)*pageSize) + ".result.c-container div.c-abstract";
                 LOG.debug("titleCssQuery:" + titleCssQuery);
                 LOG.debug("summaryCssQuery:" + summaryCssQuery);
                 Element titleElement = document.select(titleCssQuery).first();
