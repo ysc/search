@@ -112,7 +112,7 @@ public class JSoupBaiduSearcher extends AbstractBaiduSearcher{
      * @return 结果数
      */
     private int getBaiduSearchResultCount(Document document){
-        String cssQuery = "html body div#out div#in div#wrapper div#container p#page span.nums";
+        String cssQuery = "html body div div div div.nums";
         LOG.debug("total cssQuery: " + cssQuery);
         Element totalElement = document.select(cssQuery).first();
         String totalText = totalElement.text(); 
