@@ -2,37 +2,43 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.apdplat.demo.search</groupId>
-    <artifactId>search-demo</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>org.apdplat.search</groupId>
+    <artifactId>search</artifactId>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>search-demo</name>
-    <url>http://maven.apache.org</url>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <name>search</name>
+    <url>http://apdplat.org</url>
+
     <properties>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <junit.version>3.8.1</junit.version>
         <slf4j-api.version>1.6.4</slf4j-api.version>
         <logback-classic.version>0.9.28</logback-classic.version>
-        <junit.version>3.8.1</junit.version>
         <nekohtml.version>1.9.19</nekohtml.version>
         <httpclient.version>3.1</httpclient.version>
         <json.version>chargebee-1.0</json.version>
         <jsoup.version>1.7.2</jsoup.version>
         <commons-lang3>3.1</commons-lang3>
+
+        <maven-compiler-plugin.version>2.3.2</maven-compiler-plugin.version>
     </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <dependencies>
         <dependency>
@@ -64,6 +70,7 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
+            <scope>runtime</scope>
         </dependency>
         <!-- 以下两项为谷歌搜索依赖 -->
         <dependency>
