@@ -18,7 +18,7 @@
  * 
  */
 
-package org.apdplat.demo.paper;
+package org.apdplat.search.paper;
 
 import java.io.File;
 import java.util.Date;

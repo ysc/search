@@ -18,7 +18,7 @@
  * 
  */
 
-package org.apdplat.demo.person;
+package org.apdplat.search.person;
 
 import java.util.List;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package org.apdplat.demo.search;
+package org.apdplat.search;
 
 public interface Searcher {
     public SearchResult search(String keyword);

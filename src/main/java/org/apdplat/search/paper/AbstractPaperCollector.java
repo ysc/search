@@ -18,7 +18,7 @@
  * 
  */
 
-package org.apdplat.demo.paper;
+package org.apdplat.search.paper;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.apdplat.demo.search.Tools;
+import org.apdplat.search.Tools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
