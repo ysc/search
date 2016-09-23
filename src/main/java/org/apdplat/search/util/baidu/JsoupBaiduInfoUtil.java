@@ -6,9 +6,6 @@
 
 package org.apdplat.search.util.baidu;
 
-import java.io.IOException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.apdplat.search.SearchResult;
 import org.jsoup.Jsoup;
@@ -16,6 +13,10 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @author JONE
@@ -31,7 +32,7 @@ public class JsoupBaiduInfoUtil {
     /**
      * 百度搜索结果：百度为您找到相关结果约13,100个
      */
-    private static final String cssQuery = "html body div#out div#in div#wrapper div#container p#page span.nums";
+    private static final String cssQuery = "div.nums";
     /**
      * 解析标题
      */
