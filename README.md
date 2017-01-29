@@ -7,3 +7,5 @@
 </p>
 
 [捐赠致谢](https://github.com/ysc/QuestionAnsweringSystem/wiki/donation)
+
+[https://travis-ci.org/ysc/search](https://travis-ci.org/ysc/search)
